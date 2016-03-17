@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/Negro/Downloads/LandBreaker/app/build/intermediates/res/merged/debug/anim/rankinglist_anim_layout.xml",
+        "source": "/Users/Negro/Downloads/LandBreaker/app/src/main/res/anim/rankinglist_anim_layout.xml"
+    },
+    {
+        "merged": "/Users/Negro/Downloads/LandBreaker/app/build/intermediates/res/merged/debug/anim/rankinglist_anim.xml",
+        "source": "/Users/Negro/Downloads/LandBreaker/app/src/main/res/anim/rankinglist_anim.xml"
+    }
+]

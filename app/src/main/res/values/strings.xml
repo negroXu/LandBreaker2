@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">LandBreaker</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+
+    <string name="login_hint_mail">電子郵箱</string>
+    <string name="login_hint_pw">密碼    </string>
+    <string name="login_hint_twitter">Twitter賬號</string>
+    <string name="login_hint_facebook">Facebook賬號</string>
+    <string name="login_account_less">賬號長度過短</string>
+    <string name="login_password_less">密碼長度過短</string>
+    <string name="login_register_success">注册成功</string>
+
+    <string name="achievement_call">稱號：</string>
+    <string name="achievement_requirement">取得條件：</string>
+    <string name="mission_1">點擊後獲得：</string>
+    <string name="info_name_default">TIPS</string>
+    <string name="info_text_default">選中道具查看說明</string>
+
+
+    <string name="network_show_title">没有可用网络</string>
+    <string name="network_show_msg">是否对网络进行设置？</string>
+    <string name="network_show_setting">设置</string>
+    <string name="network_show_exit">离开</string>
+    <string name="network_show_error">网络异常！</string>
+    <string name="network_show_connectionless">无网络连接！</string>
+
+    <!--Map-->
+    <string name="mainGame_newmap_success">取得新地图</string>
+    <string name="mainGame_newmap_failed">获取新地图失败：</string>
+
+    <!--Bag-->
+    <string name="use_success">使用成功</string>
+    <string name="sell_success">兑换成功</string>
+
+    <!--Shop-->
+    <string name="choose_gold">选中金币</string>
+    <string name="choose_diamond">选中钻石</string>
+    <string name="no_pay_type">请选中支付方式</string>
+    <string name="buy_success">购买成功</string>
+</resources>

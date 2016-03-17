@@ -1,0 +1,82 @@
+[
+    {
+        "merged": "/Users/Negro/Downloads/LandBreaker/app/build/intermediates/res/merged/debug/layout/list_mission_and_new.xml",
+        "source": "/Users/Negro/Downloads/LandBreaker/app/src/main/res/layout/list_mission_and_new.xml"
+    },
+    {
+        "merged": "/Users/Negro/Downloads/LandBreaker/app/build/intermediates/res/merged/debug/layout/item_achievement.xml",
+        "source": "/Users/Negro/Downloads/LandBreaker/app/src/main/res/layout/item_achievement.xml"
+    },
+    {
+        "merged": "/Users/Negro/Downloads/LandBreaker/app/build/intermediates/res/merged/debug/layout/item_info_text.xml",
+        "source": "/Users/Negro/Downloads/LandBreaker/app/src/main/res/layout/item_info_text.xml"
+    },
+    {
+        "merged": "/Users/Negro/Downloads/LandBreaker/app/build/intermediates/res/merged/debug/layout/list_ranking.xml",
+        "source": "/Users/Negro/Downloads/LandBreaker/app/src/main/res/layout/list_ranking.xml"
+    },
+    {
+        "merged": "/Users/Negro/Downloads/LandBreaker/app/build/intermediates/res/merged/debug/layout/item_new.xml",
+        "source": "/Users/Negro/Downloads/LandBreaker/app/src/main/res/layout/item_new.xml"
+    },
+    {
+        "merged": "/Users/Negro/Downloads/LandBreaker/app/build/intermediates/res/merged/debug/layout/item_mission.xml",
+        "source": "/Users/Negro/Downloads/LandBreaker/app/src/main/res/layout/item_mission.xml"
+    },
+    {
+        "merged": "/Users/Negro/Downloads/LandBreaker/app/build/intermediates/res/merged/debug/layout/item_items.xml",
+        "source": "/Users/Negro/Downloads/LandBreaker/app/src/main/res/layout/item_items.xml"
+    },
+    {
+        "merged": "/Users/Negro/Downloads/LandBreaker/app/build/intermediates/res/merged/debug/layout/list_achievement.xml",
+        "source": "/Users/Negro/Downloads/LandBreaker/app/src/main/res/layout/list_achievement.xml"
+    },
+    {
+        "merged": "/Users/Negro/Downloads/LandBreaker/app/build/intermediates/res/merged/debug/layout/activity_setting.xml",
+        "source": "/Users/Negro/Downloads/LandBreaker/app/src/main/res/layout/activity_setting.xml"
+    },
+    {
+        "merged": "/Users/Negro/Downloads/LandBreaker/app/build/intermediates/res/merged/debug/layout/activity_logo.xml",
+        "source": "/Users/Negro/Downloads/LandBreaker/app/src/main/res/layout/activity_logo.xml"
+    },
+    {
+        "merged": "/Users/Negro/Downloads/LandBreaker/app/build/intermediates/res/merged/debug/layout/item_ranking.xml",
+        "source": "/Users/Negro/Downloads/LandBreaker/app/src/main/res/layout/item_ranking.xml"
+    },
+    {
+        "merged": "/Users/Negro/Downloads/LandBreaker/app/build/intermediates/res/merged/debug/layout/activity_login.xml",
+        "source": "/Users/Negro/Downloads/LandBreaker/app/src/main/res/layout/activity_login.xml"
+    },
+    {
+        "merged": "/Users/Negro/Downloads/LandBreaker/app/build/intermediates/res/merged/debug/layout/page_ranking.xml",
+        "source": "/Users/Negro/Downloads/LandBreaker/app/src/main/res/layout/page_ranking.xml"
+    },
+    {
+        "merged": "/Users/Negro/Downloads/LandBreaker/app/build/intermediates/res/merged/debug/layout/item_achievement_ranking_head.xml",
+        "source": "/Users/Negro/Downloads/LandBreaker/app/src/main/res/layout/item_achievement_ranking_head.xml"
+    },
+    {
+        "merged": "/Users/Negro/Downloads/LandBreaker/app/build/intermediates/res/merged/debug/layout/item_money.xml",
+        "source": "/Users/Negro/Downloads/LandBreaker/app/src/main/res/layout/item_money.xml"
+    },
+    {
+        "merged": "/Users/Negro/Downloads/LandBreaker/app/build/intermediates/res/merged/debug/layout/activity_page.xml",
+        "source": "/Users/Negro/Downloads/LandBreaker/app/src/main/res/layout/activity_page.xml"
+    },
+    {
+        "merged": "/Users/Negro/Downloads/LandBreaker/app/build/intermediates/res/merged/debug/layout/activity_game.xml",
+        "source": "/Users/Negro/Downloads/LandBreaker/app/src/main/res/layout/activity_game.xml"
+    },
+    {
+        "merged": "/Users/Negro/Downloads/LandBreaker/app/build/intermediates/res/merged/debug/layout/item_itempage.xml",
+        "source": "/Users/Negro/Downloads/LandBreaker/app/src/main/res/layout/item_itempage.xml"
+    },
+    {
+        "merged": "/Users/Negro/Downloads/LandBreaker/app/build/intermediates/res/merged/debug/layout/item_itemdetail.xml",
+        "source": "/Users/Negro/Downloads/LandBreaker/app/src/main/res/layout/item_itemdetail.xml"
+    },
+    {
+        "merged": "/Users/Negro/Downloads/LandBreaker/app/build/intermediates/res/merged/debug/layout/item_shop_item.xml",
+        "source": "/Users/Negro/Downloads/LandBreaker/app/src/main/res/layout/item_shop_item.xml"
+    }
+]

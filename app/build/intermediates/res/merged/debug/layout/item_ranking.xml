@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+    <ImageView
+        android:id="@+id/iv_ranking_itembg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:id="@+id/iv_ranking_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true" />
+
+    <LinearLayout
+        android:id="@+id/ll_ranking_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_ranking_rank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NO. 1"
+            android:textColor="@color/text_black"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/tv_ranking_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="成就點"
+            android:textColor="@color/text_black"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+</RelativeLayout>

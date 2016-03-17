@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.landbreaker"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="9"
+        android:targetSdkVersion="23" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+
+    <application
+        android:name="com.landbreaker.application.AppData"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" >
+        <activity
+            android:name="com.landbreaker.activity.MainGameActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.landbreaker.activity.LogoActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.landbreaker.activity.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.landbreaker.activity.RankingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.landbreaker.activity.AchievementActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name="com.landbreaker.activity.MissionActivity" />
+        <activity android:name="com.landbreaker.activity.NewActivity" />
+        <activity android:name="com.landbreaker.activity.SettingActivity" />
+        <activity android:name="com.landbreaker.activity.ShopActivity" />
+        <activity android:name="com.landbreaker.activity.ItemActivity" >
+        </activity>
+        <activity android:name="com.landbreaker.activity.ItemAtlasActivity" />
+        <!--
+ ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+    </application>
+
+</manifest>
