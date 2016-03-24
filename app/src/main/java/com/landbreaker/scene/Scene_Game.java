@@ -2,7 +2,10 @@ package com.landbreaker.scene;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.zip.Inflater;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -530,10 +533,31 @@ public class Scene_Game extends GameScene implements GameCallBack {
 		feed[0].system_id = gameItemDropList.get(mUI_depth.getDepth() + "") != null ? (Integer) gameItemDropList
 				.get(mUI_depth.getDepth() + "") : -1;
 
+		int qty = 1;
+
 		if(feed[0].system_id == -1){
 			// 分配物品 systemitemList
 //			systemitemList.get("4");
 //			feed[0].system_id = 4;
+			Iterator iter = systemitemList.entrySet().iterator();
+			if(iter.hasNext()) {
+				Map.Entry entry = (Map.Entry) iter.next();
+				String key = (String)entry.getKey();
+				int val =  (Integer) entry.getValue();
+
+				feed[0].system_id = Integer.parseInt(key);
+				if(key.equals("4")){
+					// 金币
+					qty = 10;
+				}
+
+				if(val - qty <= 0){
+					systemitemList.remove(key);
+				}else{
+					systemitemList.put(key,val-qty);
+				}
+			}
+
 		}
 
 		mSp_digTools.setTouchable(true);

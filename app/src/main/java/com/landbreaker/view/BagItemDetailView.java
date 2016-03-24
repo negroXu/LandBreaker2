@@ -31,6 +31,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class BagItemDetailView extends GamePopView implements Interface_MyThread{
 	public ImageView mIv_item_ic = null;
 	public ImageView mIv_value_bg = null;
@@ -63,9 +66,16 @@ public class BagItemDetailView extends GamePopView implements Interface_MyThread
 	private int item_id;
 	private int box_id;
 	private int sell_price;
+	private double get_time;
 
 	public final static int EXCHANGE = 4;
 	public final static int USE = 5;
+
+	public enum openBoxBy{
+		Null,Money,Key
+	};
+
+	public openBoxBy openBoxBy = null;
 
 	public BagItemDetailView(Context context) {
 		super(context);
@@ -140,11 +150,13 @@ public class BagItemDetailView extends GamePopView implements Interface_MyThread
 	 * @param bm
      * @param itemActivity
      */
-	public void setItemData(int bag_id,String guid, int item_id,int box_id,boolean isglobalItemList, Bitmap bm, ItemActivity itemActivity) {
+	public void setItemData(int bag_id,String guid, int item_id,int box_id,boolean isglobalItemList, Bitmap bm, ItemActivity itemActivity, double get_time) {
 		this.guid = guid;
 		this.bag_id = bag_id;
 		this.item_id = item_id;
 		this.box_id = box_id;
+		this.get_time = get_time;
+
 		// 10000以内为系统物品  其他为掉落物品
 		if(item_id > 10000){
 			Item_BASICITEM item = table.get(item_id);
@@ -169,6 +181,25 @@ public class BagItemDetailView extends GamePopView implements Interface_MyThread
 		}else{
 			mIv_use_button.setVisibility(View.VISIBLE);
 		}
+
+		// 宝箱
+		if(box_id != 0 && this.get_time != 0){
+			// 剩余时间
+			double leftTime = this.get_time + Config.box_time[box_id] - new Date().getTime();
+			leftTime = leftTime < 0 ? 0:leftTime;
+
+			//设置日期格式
+			SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
+
+			Log.d("leftTime","" + leftTime + ":" + leftTime);
+			// 所需宝石
+			int qty =(int)(Math.ceil(Config.box_price[box_id] * (leftTime / Config.box_time[box_id])));
+			Log.d("所需宝石", qty + "");
+		}
+	}
+
+	private String timeFormat(double t){
+		return (t / 3600) + (t % 3600 / 60) + (t % 3600 % 60) + "";
 	}
 
 	private void initView(Bitmap bm, int sell_price, String name, String description, int level){
@@ -217,9 +248,19 @@ public class BagItemDetailView extends GamePopView implements Interface_MyThread
 				item.put("bag_id",bag_id + "");
 				item.put("qty", "1");
 
-				// 宝箱得用KEY打开
 				if(box_id != 0){
-					item.put("by","1");
+					// 宝箱打开方式
+					switch (openBoxBy){
+						case Null:
+							item.put("by","null");
+							break;
+						case Key:
+							item.put("by","1");
+							break;
+						case Money:
+							item.put("by","2");
+							break;
+					}
 				}else{
 					item.put("by","null");
 				}
@@ -263,7 +304,7 @@ public class BagItemDetailView extends GamePopView implements Interface_MyThread
 
 	@Override
 	public void Callback_MyThread(String result, int flag) {
-		// 回调
+		// 回调 
 		if(itemActivity != null){
 			itemActivity.callDetail(flag,sell_price);
 		}

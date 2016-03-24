@@ -12,6 +12,8 @@ import com.landbreaker.file.ImgReader;
 
 import net.tsz.afinal.FinalBitmap;
 
+import java.lang.reflect.Array;
+
 /**
  * 游戏相关参数设置
  * 
@@ -56,6 +58,12 @@ public class Config {
 	public final static float default_PFS = 60;
 
 	public final static long default_physicsTime = 20;
+
+	/**
+	 * 宝箱参数
+	 */
+	public final static int[] box_time = new int[]{0, 1 * 3600000, 2 * 3600000, 3 * 3600000};// 开启宝箱的时间
+	public final static int[] box_price = new int[]{0, 18, 28, 48}; // 开启宝箱的费用(钻石)
 
 	/**
 	 * 游戏界面的组件位置

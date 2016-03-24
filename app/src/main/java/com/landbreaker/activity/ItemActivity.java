@@ -306,7 +306,7 @@ public class ItemActivity extends GameActivity implements ScrollViewListener,Int
 					ImageView it = (ImageView) mView_bag.get(i).findViewById(R.id.iv_items_item);
 					ImageView num = (ImageView) mView_bag.get(i).findViewById(R.id.iv_items_num);
 
-					setImageView(bg, null, bms_item_bg[0], mList_bagdata.get(indexBagType1).globalItemList[i].item_id, new BagItemTouchListener(bms_item_bg, i,mList_bagdata.get(indexBagType1).globalItemList[i].guid,mList_bagdata.get(indexBagType1).globalItemList[i].box_id,true));
+					setImageView(bg, null, bms_item_bg[0], mList_bagdata.get(indexBagType1).globalItemList[i].item_id, new BagItemTouchListener(bms_item_bg, i,mList_bagdata.get(indexBagType1).globalItemList[i].guid,mList_bagdata.get(indexBagType1).globalItemList[i].box_id,true,mList_bagdata.get(indexBagType1).globalItemList[i].get_time));
 
 					num.setImageBitmap(mImgReader.loadNumBitmap(mList_bagdata.get(indexBagType1).globalItemList[i].item_num));
 					it.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
@@ -319,7 +319,7 @@ public class ItemActivity extends GameActivity implements ScrollViewListener,Int
 					ImageView it = (ImageView) mView_bag.get(i).findViewById(R.id.iv_items_item);
 					ImageView num = (ImageView) mView_bag.get(i).findViewById(R.id.iv_items_num);
 
-					setImageView(bg, null, bms_item_bg[0], mList_bagdata.get(indexBagType1).globalSystemItemList[i].systemItem_id, new BagItemTouchListener(bms_item_bg, i,mList_bagdata.get(indexBagType1).globalSystemItemList[i].id +"",0,false));
+					setImageView(bg, null, bms_item_bg[0], mList_bagdata.get(indexBagType1).globalSystemItemList[i].systemItem_id, new BagItemTouchListener(bms_item_bg, i,mList_bagdata.get(indexBagType1).globalSystemItemList[i].id +"",0,false,0));
 
 //					num.setText("" + mList_bagdata.get(indexBagType1).globalSystemItemList[i].num);
 					num.setImageBitmap(mImgReader.loadNumBitmap(mList_bagdata.get(indexBagType1).globalItemList[i].item_num));
@@ -404,20 +404,22 @@ public class ItemActivity extends GameActivity implements ScrollViewListener,Int
 		private String guid;
 		private boolean isglobalItemList;
 		private int box_id;
+		private double get_time;
 
-		public BagItemTouchListener(Bitmap[] bms, int index, String guid, int box_id,boolean isglobalItemList) {
+		public BagItemTouchListener(Bitmap[] bms, int index, String guid, int box_id,boolean isglobalItemList,double get_time) {
 			super(bms);
 			this.index = index;
 			this.guid = guid;
 			this.box_id = box_id;
 			this.isglobalItemList = isglobalItemList;
+			this.get_time = get_time;
 		}
 
 		@Override
 		public void touchEvent(Object tag) {
 			// TODO Auto-generated method stub
 			int item_id = (Integer) tag;
-			showDetail(item_id,guid,box_id,isglobalItemList);
+			showDetail(item_id,guid,box_id,isglobalItemList,this.get_time);
 			selectedItem = -1;
 		}
 
@@ -428,9 +430,9 @@ public class ItemActivity extends GameActivity implements ScrollViewListener,Int
 		}
 	}
 
-	public void showDetail(int item_id,String guid, int box_id, boolean isglobalItemList ) {
+	public void showDetail(int item_id,String guid, int box_id, boolean isglobalItemList, double get_time ) {
 		// TODO Auto-generated method stub
-		mDetailView.setItemData(bag_id, guid, item_id, box_id,isglobalItemList, mImgReader.load("prop/" + item_id + ".png"),this);
+		mDetailView.setItemData(bag_id, guid, item_id, box_id,isglobalItemList, mImgReader.load("prop/" + item_id + ".png"),this,get_time);
 		mDetailView.show();
 	}
 
