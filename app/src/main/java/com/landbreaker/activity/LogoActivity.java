@@ -5,9 +5,13 @@ import java.util.List;
 import com.landbreaker.R;
 import com.landbreaker.config.Config;
 import com.landbreaker.database.Item_BASICMAP;
+import com.landbreaker.database.Table_BASICARCHIVEMENT;
 import com.landbreaker.database.Table_BASICITEM;
+import com.landbreaker.database.Table_BASICITEM_BASICARCHIVEMENT;
 import com.landbreaker.database.Table_BASICMAP;
 import com.landbreaker.database.Table_BASICSYSTEMITEM;
+import com.landbreaker.database.Table_BASICSYSTEMITEM_BASICARCHIVEMENT;
+import com.landbreaker.database.Table_GLOBALARCHIVEMENT_IN_PROGRESS;
 import com.landbreaker.database.Table_MAPFORTUNE;
 import com.landbreaker.file.ImgReader;
 import com.landbreaker.logic.GameUISetting;
@@ -83,6 +87,7 @@ public class LogoActivity extends Activity {
      */
     private void initDataBase() {
         // TODO Auto-generated method stub
+        // 基础物品表
         Table_BASICITEM basicItem = new Table_BASICITEM(getApplicationContext());
         if (basicItem.getCount() == 0) {
             basicItem.sample();
@@ -93,12 +98,14 @@ public class LogoActivity extends Activity {
         basicItem.close();
         basicItem = null;
 
+        // 系统物品表
         Table_BASICSYSTEMITEM basicItem1 = new Table_BASICSYSTEMITEM(getApplicationContext());
         if(basicItem1.getCount() == 0){
             basicItem1.sample();
             Log.d("Table_BASICSYSTEMITEM","success");
         }
 
+        // 地图运气表
         Table_MAPFORTUNE basicItem2 = new Table_MAPFORTUNE(getApplicationContext());
         if (basicItem2.getCount() == 0) {
             basicItem2.sample();
@@ -109,6 +116,7 @@ public class LogoActivity extends Activity {
         basicItem2.close();
         basicItem2 = null;
 
+        // 地图场景表
         Table_BASICMAP basicItem3 = new Table_BASICMAP(getApplicationContext());
         if (basicItem3.getCount() == 0) {
             basicItem3.sample();
@@ -116,6 +124,40 @@ public class LogoActivity extends Activity {
         basicItem3.close();
         basicItem3 = null;
 
+        // 成就表
+        Table_BASICARCHIVEMENT basicItem4 = new Table_BASICARCHIVEMENT(getApplicationContext());
+        if(basicItem4.getCount() == 0){
+            basicItem4.sample();
+        }
+        basicItem4.close();
+        basicItem4 = null;
+
+        // 基础物品与成就关联条件
+        Table_BASICITEM_BASICARCHIVEMENT basicItem5 = new Table_BASICITEM_BASICARCHIVEMENT(getApplicationContext());
+        if(basicItem5.getCount() == 0){
+            basicItem5.sample();
+        }
+        basicItem5.close();
+        basicItem5 = null;
+
+        // 系统物品与成就关联条件
+        Table_BASICSYSTEMITEM_BASICARCHIVEMENT basicItem6 = new Table_BASICSYSTEMITEM_BASICARCHIVEMENT(getApplicationContext());
+        if(basicItem6.getCount() == 0){
+            basicItem6.sample();
+        }
+        basicItem6.close();
+        basicItem6 = null;
+
+        // 当前用户成就进度
+        Table_GLOBALARCHIVEMENT_IN_PROGRESS basicItem7 = new Table_GLOBALARCHIVEMENT_IN_PROGRESS(getApplicationContext());
+        if(basicItem7.getCount() == 0){
+            basicItem7.sample();
+        }else{
+//            basicItem7.deleteTable();
+//            basicItem7.sample();
+        }
+        basicItem7.close();
+        basicItem7 = null;
     }
 
 }

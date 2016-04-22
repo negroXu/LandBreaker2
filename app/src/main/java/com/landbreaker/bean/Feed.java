@@ -13,6 +13,8 @@ public class Feed {
     public final static int FEED_TYPE_SYNC = 1;
     public final static int FEED_TYPE_BUY = 2;
     public final static int FEED_TYPE_SELL = 3;
+    public final static int FEED_TYPE_USE = 4;
+
     @SerializedName("map_level")
     public int map_level;
     @SerializedName("map_equip")

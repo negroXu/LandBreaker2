@@ -42,7 +42,7 @@ public class GameStage {
 		public static class Drill {
 			public final static int DURABLE = 60;
 
-			public final static int POWER = 4;
+			public final static int POWER = 3;
 
 			public final static Point CENTER_POS = new Point(347, 641);
 			public final static int ANGLE = 15;
@@ -53,7 +53,7 @@ public class GameStage {
 		public static class Piledriver {
 			public final static int DURABLE = 100;
 
-			public final static int POWER = 7;
+			public final static int POWER = 4;
 
 			public final static Point CENTER_POS = new Point(347, 641);
 			public final static int ANGLE = 15;

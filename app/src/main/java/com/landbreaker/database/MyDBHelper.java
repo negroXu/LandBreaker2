@@ -10,7 +10,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
 	// 数据库名称
 	public static final String DATABASE_NAME = "mydata.db";
 	// 数据库版本，资料结构改变的时候要更改这个数字，通常是加一
-	public static final int VERSION = 6;
+	public static final int VERSION = 1;
 	// 数据库物件，固定的字段变量
 	private static SQLiteDatabase database;
 
@@ -26,6 +26,10 @@ public class MyDBHelper extends SQLiteOpenHelper {
 		db.execSQL(Table_BASICSYSTEMITEM.CREATE_TABLE);
 		db.execSQL(Table_MAPFORTUNE.CREATE_TABLE);
 		db.execSQL(Table_BASICMAP.CREATE_TABLE);
+		db.execSQL(Table_BASICARCHIVEMENT.CREATE_TABLE);
+		db.execSQL(Table_BASICITEM_BASICARCHIVEMENT.CREATE_TABLE);
+		db.execSQL(Table_BASICSYSTEMITEM_BASICARCHIVEMENT.CREATE_TABLE);
+        db.execSQL(Table_GLOBALARCHIVEMENT_IN_PROGRESS.CREATE_TABLE);
 	}
 
 	@Override
@@ -36,6 +40,10 @@ public class MyDBHelper extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + Table_BASICSYSTEMITEM.TABLE_NAME);
 		db.execSQL("DROP TABLE IF EXISTS " + Table_MAPFORTUNE.TABLE_NAME);
 		db.execSQL("DROP TABLE IF EXISTS " + Table_BASICMAP.TABLE_NAME);
+		db.execSQL("DROP TABLE IF EXISTS " + Table_BASICARCHIVEMENT.TABLE_NAME);
+		db.execSQL("DROP TABLE IF EXISTS " + Table_BASICITEM_BASICARCHIVEMENT.TABLE_NAME);
+		db.execSQL("DROP TABLE IF EXISTS " + Table_BASICSYSTEMITEM_BASICARCHIVEMENT.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + Table_GLOBALARCHIVEMENT_IN_PROGRESS.TABLE_NAME);
 		// 呼叫onCreate建立新版的表格
 		onCreate(db);
 	}

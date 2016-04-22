@@ -28,6 +28,8 @@ import com.landbreaker.base.GameActivity;
 import com.landbreaker.bean.JsonData;
 import com.landbreaker.bean.UserData;
 import com.landbreaker.config.Config;
+import com.landbreaker.database.Table_BASICSYSTEMITEM;
+import com.landbreaker.file.ToastUtils;
 import com.landbreaker.internet.InternetApi;
 import com.landbreaker.internet.JsonUtils;
 import com.landbreaker.listener.GameButtonTouchListener;
@@ -80,11 +82,6 @@ public class LoginActivity extends GameActivity implements Interface_MyThread {
 
     private static final int REQUEST_CODE_REGISTER_BY_ACCOUNT = 1;
     private static final int REQUEST_CODE_LOGIN_BY_ACCOUNT = 2;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-//    private GoogleApiClient client;
 
     @Override
     protected void init() {
@@ -375,8 +372,10 @@ public class LoginActivity extends GameActivity implements Interface_MyThread {
     private void resultRegisterByAccount(String json) {
         JsonData data = JsonUtils.getData(json, JsonData.class);
         if (data != null && data.isSuccess()) {
-            Toast.makeText(LoginActivity.this, R.string.login_register_success, Toast.LENGTH_SHORT).show();
+            ToastUtils.showMessage(LoginActivity.this,R.string.login_register_success);
             loginPage();
+        }else{
+            ToastUtils.showMessage(LoginActivity.this,data.getmsg());
         }
     }
 
@@ -391,15 +390,11 @@ public class LoginActivity extends GameActivity implements Interface_MyThread {
             ((AppData)getApplication()).userData = userData;
             ((AppData)getApplication()).equipList = userData.playerList[0].getequipList();
 
-            Toast.makeText(LoginActivity.this, jsonObject.getString("msg"), Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(LoginActivity.this, MainGameActivity.class);
-            // 暂用
-//            Intent intent = new Intent(LoginActivity.this, ShopActivity.class);
             startActivity(intent);
             finish();
-        } else {
-            Toast.makeText(LoginActivity.this, jsonObject.getString("msg"), Toast.LENGTH_SHORT).show();
         }
+        ToastUtils.showMessage(LoginActivity.this,jsonObject.getString("msg"));
     }
 
     /**
@@ -407,77 +402,16 @@ public class LoginActivity extends GameActivity implements Interface_MyThread {
      */
     private boolean checkInput(String account, String password) {
         if (account.length() < 6) {
-            Toast.makeText(LoginActivity.this, R.string.login_account_less, Toast.LENGTH_SHORT).show();
+            ToastUtils.showMessage(LoginActivity.this, R.string.login_account_less);
             return false;
         }
         if (password.length() < 6) {
-            Toast.makeText(LoginActivity.this, R.string.login_password_less, Toast.LENGTH_SHORT).show();
+            ToastUtils.showMessage(LoginActivity.this,R.string.login_password_less);
             return false;
         }
         return true;
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-//        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-//        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Login Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.landbreaker.activity/http/host/path")
-        );
-//        AppIndex.AppIndexApi.start(client, viewAction);
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction2 = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Login Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.landbreaker.activity/http/host/path")
-        );
-//        AppIndex.AppIndexApi.start(client, viewAction2);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Login Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.landbreaker.activity/http/host/path")
-        );
-//        AppIndex.AppIndexApi.end(client, viewAction);
-//        client.disconnect();
-    }
 }
 
 

@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Message;
 import android.preference.Preference;
+import android.support.annotation.Nullable;
 import android.support.v4.util.SimpleArrayMap;
 import android.util.Log;
 import android.widget.Toast;
@@ -17,6 +18,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.landbreaker.application.AppData;
 import com.landbreaker.base.GameScene._GameRequestData;
+import com.landbreaker.bean.ArchivementService;
 import com.landbreaker.bean.Feed;
 import com.landbreaker.bean.MapData;
 import com.landbreaker.bean.PlayerList;
@@ -26,6 +28,7 @@ import com.landbreaker.database.Item_BASICITEM;
 import com.landbreaker.database.Item_BASICSYSTEMITEM;
 import com.landbreaker.database.Table_BASICITEM;
 import com.landbreaker.database.Table_BASICSYSTEMITEM;
+import com.landbreaker.file.ToastUtils;
 import com.landbreaker.internet.InternetApi;
 import com.landbreaker.item.GameItem_Dig;
 import com.landbreaker.testdata.TestData;
@@ -38,8 +41,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class MainGameActivity extends Activity implements _GameRequestData, Interface_MyThread {
@@ -48,6 +53,7 @@ public class MainGameActivity extends Activity implements _GameRequestData, Inte
     private AppData appdata;
     private String token,last_guid;
     private int last_depth = 0;
+    private ArchivementService archivementService;
 
     private ProgressDialog dialog;
 
@@ -55,31 +61,28 @@ public class MainGameActivity extends Activity implements _GameRequestData, Inte
     private static final int REQUEST_CODE_GETPLAYERINFO = 2;
     private static final int REQUEST_CODE_SYNC = 3;
     private static final int REQUEST_CODE_OLDMAP = 4;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-//    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        init();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-//        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        try {
+            init();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private void init() {
+    private void init() throws Exception {
         mGameView = new GameView(this, Config.default_PFS);
         appdata = (AppData) getApplication();
         token = appdata.userData.playerList[0].token;
 
-
+        // 私有数据 存储底图深度
         SharedPreferences sharedPreferences = getSharedPreferences("mapdata",MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        // 成就系统
+        archivementService = new ArchivementService(getApplication());
 
         if (token == null) {
             // 重新登陆
@@ -118,8 +121,9 @@ public class MainGameActivity extends Activity implements _GameRequestData, Inte
     protected void onResume() {
         // TODO Auto-generated method stub
         setContentView(mGameView);
+        requestGetPlayerInfo();
         // 刷新体力
-//        if(((AppData)getApplication()).userData.playerList != null){
+//        if(((AppData)getApplication()).userData.playerList != null && mGameView.Scene != null){
 //            mGameView.Scene.setToriiStamina(((AppData)getApplication()).userData.playerList[0].hp);
 //        }
         super.onResume();
@@ -216,10 +220,20 @@ public class MainGameActivity extends Activity implements _GameRequestData, Inte
             // 执行同步
             InternetApi.sync(MainGameActivity.this,token,feedArrar.toString(),MainGameActivity.this,REQUEST_CODE_SYNC);
 
+            // 数组转为链表
+            List<Feed> feedList = new ArrayList<Feed>();
+            for(int i = 0; i < feeds.length; i++){
+                feedList.add(feeds[i]);
+            }
+            archivementService.updateArchivement(appdata.userData.playerList[0],feedList);
+            archivementService.destory();
+
             Toast.makeText(this, "id:" + feeds[0].system_id + "\n depth:" + feeds[0].map_level + "\nname:" + name,
                     Toast.LENGTH_LONG).show();
         }catch (JSONException e){
 
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
@@ -249,7 +263,7 @@ public class MainGameActivity extends Activity implements _GameRequestData, Inte
                     mGameView.Scene.changeMapFinish();
                 }
                 //失败提示 为处理
-                Toast.makeText(MainGameActivity.this, jsonObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                ToastUtils.showMessage(MainGameActivity.this,jsonObject.getString("msg"));
             }
         }catch(JSONException e){
         }
@@ -267,9 +281,11 @@ public class MainGameActivity extends Activity implements _GameRequestData, Inte
                     break;
                 case REQUEST_CODE_GETPLAYERINFO:
                     for(int i = 0;i < ((AppData)getApplication()).userData.playerList.length; i++){
-                        if(((AppData)getApplication()).userData.playerList[i].token.equals(token)){
+                        if(((AppData)getApplication()).userData.playerList[i].token.equals(token) && mGameView.Scene != null){
                             ((AppData)getApplication()).userData.playerList[i] = new Gson().fromJson((String)msg.obj,new TypeToken<PlayerList>(){}.getType());
+                            ((AppData)getApplication()).equipList =((AppData)getApplication()).userData.playerList[i].getequipList();
                             mGameView.Scene.setToriiStamina(((AppData)getApplication()).userData.playerList[i].hp);
+//                            mGameView.Scene.initItemTools(((AppData)getApplication()).equipList);
                         }
                     }
                     break;
@@ -329,26 +345,6 @@ public class MainGameActivity extends Activity implements _GameRequestData, Inte
         requestGetPlayerInfo();
 
         //Toast.makeText(this, "" + map.map_id + "\n" + map.item_list_return, Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-//        client.connect();
-//        Action viewAction = Action.newAction(
-//                Action.TYPE_VIEW, // TODO: choose an action type.
-//                "MainGame Page", // TODO: Define a title for the content shown.
-//                // TODO: If you have web page content that matches this app activity's content,
-//                // make sure this auto-generated web page URL is correct.
-//                // Otherwise, set the URL to null.
-//                Uri.parse("http://host/path"),
-//                // TODO: Make sure this auto-generated app deep link URI is correct.
-//                Uri.parse("android-app://com.landbreaker.activity/http/host/path")
-//        );
-//        AppIndex.AppIndexApi.start(client, viewAction);
     }
 
     @Override

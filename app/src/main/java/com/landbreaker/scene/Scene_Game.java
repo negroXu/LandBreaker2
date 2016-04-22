@@ -65,7 +65,7 @@ public class Scene_Game extends GameScene implements GameCallBack {
 	public  UI_depth mUI_depth = null;// 深度条
 
 	private GameButton mUI_menuButton = null;// 菜单按钮
-	private UI_ToolsBar mUI_toolsBar = null;// 工具栏
+	public UI_ToolsBar mUI_toolsBar = null;// 工具栏
 
 	private Effect_Dig mEffect_dig = null;// 挖掘特效
 	private Effect_Dig mEffect_dig_front = null;
@@ -76,8 +76,8 @@ public class Scene_Game extends GameScene implements GameCallBack {
 	private BaseSprite mSp_foundItem = null;// 发现道具
 	private List<BaseSprite> mList_digEffect = null;
 
-	private UI_digItem mList_digTools[] = null;
-	private List<GameItem_Dig>[] mItem_list;
+	public UI_digItem mList_digTools[] = null;
+	public List<GameItem_Dig>[] mItem_list;
 
 	private UI_menu mUI_menu = null;// 菜单
 
@@ -224,13 +224,12 @@ public class Scene_Game extends GameScene implements GameCallBack {
 	 * 初始化工具栏
 	 * @param equiplist 铲工具个数
 	 */
-	private void initItemTools(HashMap<Integer,Integer> equiplist) {
+	public void initItemTools(HashMap<Integer,Integer> equiplist) {
 		mUI_toolsBar = new UI_ToolsBar(mImgReader.load("gameui/itemicon_up.png"),
 				mImgReader.load("gameui/itemicon_down.png"), mImgReader.load("gameui/item_up.png"),
 				mImgReader.load("gameui/item_down.png"));
 
 		mUI_toolsBar.setPosition(Config.GameUILayout.tool_main, Config.GameUILayout.tool_others, scaleSize);
-
 		initItemDataList(equiplist);
 		mList_digTools = new UI_digItem[6];
 		mList_digTools[0] = new UI_digItem(mContext, mImgReader.load("tools/84jiaochan.png"), mbms_DigitImage, PLASTIC_SHOVEL,
@@ -255,7 +254,7 @@ public class Scene_Game extends GameScene implements GameCallBack {
 	 * 初始化工具列表(工具数量)
 	 */
 	@SuppressWarnings("unchecked")
-	private void initItemDataList(HashMap<Integer,Integer> equiplist) {
+	public void initItemDataList(HashMap<Integer,Integer> equiplist) {
 		// TODO Auto-generated method stub
 		mItem_list = new ArrayList[6];
 		for (int i = 0; i < mItem_list.length; i++) {
@@ -528,8 +527,9 @@ public class Scene_Game extends GameScene implements GameCallBack {
 	 * 获得道具
 	 */
 	private void getItem() {
-		Feed[] feed = new Feed[1];
+		Feed[] feed = new Feed[2];
 		feed[0] = new Feed();
+        feed[0].type = 1;
 		feed[0].system_id = gameItemDropList.get(mUI_depth.getDepth() + "") != null ? (Integer) gameItemDropList
 				.get(mUI_depth.getDepth() + "") : -1;
 
@@ -567,6 +567,14 @@ public class Scene_Game extends GameScene implements GameCallBack {
 
 		feed[0].map_level = mUI_depth.getDepth();
 		feed[0].qty = 1;
+
+		//test
+		feed[1] = new Feed();
+        feed[1].type = 1;
+		feed[1].system_id = 4;
+		feed[1].qty = 10;
+		feed[1].map_level = mUI_depth.getDepth();
+
 		upLoadData(feed,mUI_toolsBar);
 
 	}

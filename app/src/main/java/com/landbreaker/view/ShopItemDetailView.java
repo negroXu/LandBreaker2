@@ -22,6 +22,7 @@ import com.landbreaker.bean.MapData;
 import com.landbreaker.bean.PlayerList;
 import com.landbreaker.config.Config;
 import com.landbreaker.file.ImgReader;
+import com.landbreaker.file.ToastUtils;
 import com.landbreaker.internet.InternetApi;
 import com.landbreaker.logic.GameUISetting;
 import com.landbreaker.testdata.ShopItemData;
@@ -157,7 +158,7 @@ public class ShopItemDetailView extends GamePopView implements Interface_MyThrea
 			case CHOOSEGLOD:
 				// 选中金币支付
 				paytype = CHOOSEGLOD;
-				Toast.makeText(mContext, R.string.choose_gold, Toast.LENGTH_SHORT).show();
+				ToastUtils.showMessage(mContext,R.string.choose_gold);
 				mIv_value_bg.setImageBitmap(bm_value_bg[1]);
 				mIv_value_diamond_bg.setImageBitmap(bm_value_bg[2]);
 
@@ -165,7 +166,7 @@ public class ShopItemDetailView extends GamePopView implements Interface_MyThrea
 			case CHOISEDIAMOND:
 				// 选中钻石支付
 				paytype = CHOISEDIAMOND;
-				Toast.makeText(mContext, R.string.choose_diamond, Toast.LENGTH_SHORT).show();
+				ToastUtils.showMessage(mContext,R.string.choose_diamond);
 				mIv_value_bg.setImageBitmap(bm_value_bg[2]);
 				mIv_value_diamond_bg.setImageBitmap(bm_value_bg[1]);
 				break;
@@ -213,8 +214,7 @@ public class ShopItemDetailView extends GamePopView implements Interface_MyThrea
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 				case REQUEST_SNCY:
-					Toast.makeText(mContext, R.string.buy_success, Toast.LENGTH_SHORT).show();
-
+					ToastUtils.showMessage(mContext,R.string.buy_success);
 					break;
 			}
 		}

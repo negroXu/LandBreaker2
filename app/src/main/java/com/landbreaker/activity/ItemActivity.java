@@ -27,6 +27,7 @@ import com.landbreaker.config.Config;
 import com.landbreaker.database.Item_BASICITEM;
 import com.landbreaker.database.Table_BASICITEM;
 import com.landbreaker.file.ImgReader;
+import com.landbreaker.file.ToastUtils;
 import com.landbreaker.internet.InternetApi;
 import com.landbreaker.listener.GameButtonTouchListener;
 import com.landbreaker.logic.GameUISetting;
@@ -451,11 +452,10 @@ public class ItemActivity extends GameActivity implements ScrollViewListener,Int
 				Message msg = new Message();
 				msg.what = REFRESH_GOLDCOUN;
 				mHandler.sendMessage(msg);
-				Toast.makeText(ItemActivity.this, R.string.sell_success, Toast.LENGTH_SHORT).show();
-
+				ToastUtils.showMessage(ItemActivity.this,R.string.sell_success);
 				break;
 			case USE:
-				Toast.makeText(ItemActivity.this, R.string.use_success, Toast.LENGTH_SHORT).show();
+				ToastUtils.showMessage(ItemActivity.this, R.string.use_success);
 				break;
 		}
 

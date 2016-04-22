@@ -22,6 +22,7 @@ import com.landbreaker.base.GamePageActivity;
 import com.landbreaker.bean.MapData;
 import com.landbreaker.config.Config;
 import com.landbreaker.file.ImgReader;
+import com.landbreaker.file.ToastUtils;
 import com.landbreaker.internet.InternetApi;
 import com.landbreaker.internet.URLS;
 import com.landbreaker.listener.GameButtonTouchListener;
@@ -315,7 +316,7 @@ public class ShopActivity extends GamePageActivity implements Interface_MyThread
 				mHandler.sendMessage(msg);
 			}else{
 				//失败提示 为处理
-				Toast.makeText(ShopActivity.this, jsonObject.getString("msg"), Toast.LENGTH_SHORT).show();
+				ToastUtils.showMessage(ShopActivity.this,jsonObject.getString("msg"));
 			}
 		}catch(JSONException e){
 

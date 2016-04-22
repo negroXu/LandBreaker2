@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.landbreaker.R;
 import com.landbreaker.config.Config;
+import com.landbreaker.database.Item_BASICARCHIVEMENT;
+import com.landbreaker.database.Item_GLOBALARCHIVEMENT_IN_PROGRESS;
 import com.landbreaker.logic.GameUISetting;
 import com.landbreaker.testdata.AchievementData;
 
@@ -17,20 +19,26 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import net.tsz.afinal.FinalBitmap;
+
 public class AchievementListAdapter extends BaseAdapter {
-	private List<AchievementData> mData;
+	private List<Item_BASICARCHIVEMENT> mData;
 	private LayoutInflater mInflater;
 	private Bitmap bg = null;
 	private Bitmap complete = null;
 	private Bitmap ico_bg = null;
+	private FinalBitmap finalBitmap;
+	private boolean isCompleted;
 
-	public AchievementListAdapter(Context context, List<AchievementData> data, Bitmap bg, Bitmap ico_bg,
-			Bitmap ico_complete) {
+	public AchievementListAdapter(Context context, List<Item_BASICARCHIVEMENT> data, Bitmap bg, Bitmap ico_bg,
+								  Bitmap ico_complete, boolean isCompleted) {
 		mData = data;
 		mInflater = LayoutInflater.from(context);
 		this.bg = bg;
 		this.complete = ico_complete;
 		this.ico_bg = ico_bg;
+		this.finalBitmap = Config.finalBitmap(context);
+		this.isCompleted = isCompleted;
 	}
 
 	@Override
@@ -93,14 +101,15 @@ public class AchievementListAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
-		AchievementData data = mData.get(position);
+		Item_BASICARCHIVEMENT data = mData.get(position);
 
-		holder.icon.setImageBitmap(data.icon);
-		GameUISetting.setViewWidthHeight(holder.icon, data.icon);
-		holder.name.setText(data.name);
+//		holder.icon.setImageBitmap(data.pic_url);
+		finalBitmap.display(holder.icon,data.pic_url);
+//		GameUISetting.setViewWidthHeight(holder.icon, );
+		holder.name.setText(data.NAME);
 		holder.requirement.setText(data.requirement);
 
-		if (data.isComplete)
+		if (isCompleted)
 			holder.complete.setVisibility(View.VISIBLE);
 		else
 			holder.complete.setVisibility(View.INVISIBLE);
